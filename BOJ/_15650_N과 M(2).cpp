@@ -10,29 +10,35 @@
 #include <functional>
 using namespace std;
 int n,m;
-vector<int> v(9);
-void backTracking(int start,int index){
-    if(index==m){
+int arr[9];
+bool visit[9];
+void func(int cnt,int index){
+    if(cnt==m){
         for(int i=0;i<m;i++){
-            cout<<v[i]<<" ";
+            cout<<arr[i]<<" ";
         }
         cout<<'\n';
         return;
-    }
-
-    for(int i=start;i<n;i++){
-        v[index]=i+1;
-        backTracking(i+1,index+1);
-
+    }else{
+        for(int i=index;i<=n;i++){
+            if(visit[i]==false){
+                visit[i]=true;
+                arr[cnt]=i;
+                func(cnt+1,i);
+                visit[i]=false;
+            }
+        }
     }
 }
-
 int main(){
     cin.tie(0);
     cout.tie(0);
     ios::sync_with_stdio(false);
     cin>>n>>m;
-    backTracking(0,0);    
+    func(0,1);
+
+    
+ 
     
     return 0;
 }
